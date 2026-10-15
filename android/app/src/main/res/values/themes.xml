@@ -1,0 +1,11 @@
+<resources>
+    <style name="Theme.FoodLoop" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/saffron_primary</item>
+        <item name="colorPrimaryVariant">@color/saffron_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/green_accent</item>
+        <item name="colorSecondaryVariant">@color/navy_primary</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:statusBarColor">@color/navy_primary</item>
+    </style>
+</resources>

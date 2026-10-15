@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FoodLoop - Food Waste Reduction & Redistribution System</title>
+  <meta name="description" content="FoodLoop connects local food businesses, bakeries, caterers, and individuals with charities and community members to rescue surplus food and eliminate hunger.">
+  
+  <!-- Modern Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Sticky Main Navigation Header -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="navbar" aria-label="Main Navigation">
+        <!-- Logo -->
+        <a href="#home" class="brand-logo" id="navLogo">
+          <div class="brand-icon-wrapper" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18.178 8c5.096 0 5.096 8 0 8-5.095 0-7.083-8-12.178-8-5.096 0-5.096 8 0 8 5.095 0 7.083-8 12.178-8z"/>
+              <path d="M12 6.5c-1 1.5-1 3.5 0 5"/>
+            </svg>
+          </div>
+          <span class="brand-text">Food<span class="highlight">Loop</span></span>
+        </a>
+
+        <!-- Desktop Navigation Links (All on single line) -->
+        <ul class="nav-links" id="navLinksContainer">
+          <li><a href="#home" class="nav-link active" data-view="home">Home</a></li>
+          <li>
+            <a href="#browse" class="nav-link" data-view="browse">
+              Browse Food
+              <span class="nav-badge" id="navAvailableBadge" style="display: none;">0</span>
+            </a>
+          </li>
+          <li><a href="#dashboard" class="nav-link" data-view="dashboard">Dashboard</a></li>
+          <li>
+            <a href="#reservations" class="nav-link" data-view="reservations">
+              Pickups
+              <span class="nav-badge green-badge" id="navPendingBadge" style="display: none;">0</span>
+            </a>
+          </li>
+          <li id="navMyDonationsItem" style="display: none;">
+            <a href="#my-donations" class="nav-link" data-view="my-donations">My Donations</a>
+          </li>
+          <li id="navAuthContainer">
+            <button class="nav-auth-btn" id="openAuthModalBtn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <span>Register / Sign In</span>
+            </button>
+          </li>
+        </ul>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       MAIN VIEWS CONTAINER (Single-Page App Layout)
+       ========================================================================= -->
+  <main id="mainAppContent">
+
+    <!-- VIEW 1: HOME VIEW -->
+    <section id="view-home" class="app-view active-view">
+      <!-- Hero Section -->
+      <div class="hero-section">
+        <div class="container">
+          <div class="hero-grid">
+            <div class="hero-content">
+              <div class="hero-tag">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                <span>Zero Hunger • Zero Food Waste • Community Food Rescue</span>
+              </div>
+              <h1 class="hero-title">
+                Turn Surplus Food Into <span class="text-gradient">Community Nourishment.</span>
+              </h1>
+              <p class="hero-description">
+                FoodLoop connects local bakeries, markets, caterers, and banquets with grassroots shelters and volunteers to rescue quality food before it goes to waste. Real-time listings, seamless reservations, and verified deliveries.
+              </p>
+              <div class="hero-actions">
+                <button class="btn btn-primary" data-action-view="browse" id="heroBrowseBtn">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  Browse Available Food
+                </button>
+                <button class="btn btn-secondary" data-action-view="add">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  + Donate Surplus Food
+                </button>
+              </div>
+
+              <!-- Quick assurance badges -->
+              <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; font-size: 0.85rem; color: #64748B;">
+                <span style="display: inline-flex; align-items: center; gap: 0.4rem;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>100% Free for Charities</span>
+                </span>
+                <span style="display: inline-flex; align-items: center; gap: 0.4rem;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Verified Freshness Standards</span>
+                </span>
+                <span style="display: inline-flex; align-items: center; gap: 0.4rem;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Secure PIN Verification (FL-XXXX)</span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Hero Visual Card -->
+            <div class="hero-visual-card">
+              <img 
+                src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80" 
+                alt="Fresh produce and groceries organized for community food redistribution" 
+                class="hero-main-img"
+                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=800&q=80';"
+              />
+              <div class="hero-stat-badge">
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: #10B981; display: inline-block;"></span>
+                <span>Active Rescue Network</span>
+              </div>
+              <div class="hero-overlay-stat">
+                <div>
+                  <div style="font-size: 0.75rem; color: #64748B; font-weight: 700; text-transform: uppercase;">Recent Rescue</div>
+                  <div style="font-weight: 800; color: #0A1931; font-size: 1.05rem;">Artisan Bread & Fresh Produce Box</div>
+                </div>
+                <div style="text-align: right;">
+                  <span style="background: #DCFCE7; color: #065F46; font-size: 0.75rem; font-weight: 800; padding: 0.25rem 0.65rem; border-radius: 999px;">
+                    Saved Today
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Impact Stats Ticker Banner (Clean Redesigned Blocks & SVGs) -->
+      <div class="container">
+        <div class="stats-banner">
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-icon green">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
+              </div>
+              <div>
+                <div class="stat-number" id="homeHeroRescued">165.5 kg</div>
+                <div class="stat-label">Food Rescued</div>
+              </div>
+            </div>
+
+            <div class="stat-item">
+              <div class="stat-icon saffron">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+              </div>
+              <div>
+                <div class="stat-number" id="homeHeroMeals">330+</div>
+                <div class="stat-label">Meals Provided</div>
+              </div>
+            </div>
+
+            <div class="stat-item">
+              <div class="stat-icon chakra">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></line></svg>
+              </div>
+              <div>
+                <div class="stat-number" id="homeHeroAvailable">5</div>
+                <div class="stat-label">Available Donations</div>
+              </div>
+            </div>
+
+            <div class="stat-item">
+              <div class="stat-icon navy">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+              </div>
+              <div>
+                <div class="stat-number" id="homeHeroPending">2</div>
+                <div class="stat-label">Pending Pickups</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured Call to Action Banner (Clean Modern Emerald Palette) -->
+      <section style="padding: 2rem 0 3.5rem;">
+        <div class="container">
+          <div class="action-banner-card" style="background: linear-gradient(135deg, #065F46 0%, #047857 50%, #0F766E 100%); border-radius: var(--radius-lg); padding: 3rem 2.5rem; color: white; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem; box-shadow: 0 12px 30px -4px rgba(6, 95, 70, 0.25); border: 1px solid rgba(255, 255, 255, 0.15);">
+            <div style="max-width: 620px;">
+              <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.25); color: #A7F3D0; font-weight: 700; text-transform: uppercase; font-size: 0.78rem; letter-spacing: 0.06em; padding: 4px 12px; border-radius: 9999px; margin-bottom: 0.75rem;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Community Food Rescue
+              </span>
+              <h3 style="font-size: 2rem; font-weight: 800; margin: 0.25rem 0 0.75rem; line-height: 1.25; color: #FFFFFF;">Have Unsold Food Ready for Rescue?</h3>
+              <p style="color: #E6FFFA; font-size: 1rem; line-height: 1.55;">Connect with verified local shelters and couriers in seconds. Every meal donated directly nourishes families and eliminates landfill emissions.</p>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <button class="btn btn-primary" data-action-view="add" style="background: #10B981; color: white; border: none; font-weight: 700; padding: 0.75rem 1.5rem; border-radius: var(--radius-full); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);">
+                + Donate Food Now
+              </button>
+              <button class="btn btn-secondary" data-action-view="browse" style="background: rgba(255, 255, 255, 0.95); color: #065F46; font-weight: 700; padding: 0.75rem 1.4rem; border-radius: var(--radius-full); border: none;">
+                Browse Listings
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- VIEW 2: DASHBOARD VIEW -->
+    <section id="view-dashboard" class="app-view">
+      <div class="container" style="padding-top: 3rem;">
+        <div class="section-header" style="display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <span class="section-subtitle">Real-Time Operational Center</span>
+            <h2 class="section-title">Community Food Dashboard</h2>
+            <p class="section-desc">Track active donations, volunteer couriers, and aggregate community impact in real-time.</p>
+          </div>
+          <div style="display: flex; gap: 0.75rem; align-items: center;">
+            <button class="btn btn-outline-chakra btn-sm" id="resetDemoBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v6h6"/><path d="M21 12A9 9 0 0 0 6 5.3L3 8"/><path d="M21 22v-6h-6"/><path d="M3 12a9 9 0 0 0 15 6.7l3-2.7"/></svg>
+              Reset Demo Data
+            </button>
+            <button class="btn btn-primary btn-sm" data-action-view="add">
+              + Add New Listing
+            </button>
+          </div>
+        </div>
+
+        <!-- Dashboard KPI Cards Grid -->
+        <div class="kpi-grid">
+          <div class="kpi-card green-accent">
+            <div class="kpi-icon-wrap green">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div class="kpi-content">
+              <div class="kpi-value" id="kpiTotalRescued">0 kg</div>
+              <div class="kpi-label">Total Food Rescued</div>
+              <div class="kpi-subtext" id="kpiMealsEquivalent">~0 Meals Provided</div>
+            </div>
+          </div>
+
+          <div class="kpi-card saffron-accent">
+            <div class="kpi-icon-wrap saffron">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="kpi-content">
+              <div class="kpi-value" id="kpiActiveListings">0</div>
+              <div class="kpi-label">Available for Pickup</div>
+              <div class="kpi-subtext">Immediate rescue needed</div>
+            </div>
+          </div>
+
+          <div class="kpi-card navy-accent">
+            <div class="kpi-icon-wrap navy">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            </div>
+            <div class="kpi-content">
+              <div class="kpi-value" id="kpiPendingPickups">0</div>
+              <div class="kpi-label">Active Courier Tasks</div>
+              <div class="kpi-subtext">Reserved & in transit</div>
+            </div>
+          </div>
+
+          <div class="kpi-card chakra-accent">
+            <div class="kpi-icon-wrap chakra">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <div class="kpi-content">
+              <div class="kpi-value" id="kpiCompletedRescues">0</div>
+              <div class="kpi-label">Completed Deliveries</div>
+              <div class="kpi-subtext" id="kpiCo2Saved">~0 kg CO2 Prevented</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Activity Log Table -->
+        <div class="dashboard-activity-panel">
+          <div class="panel-header">
+            <h3>Recent Food Donations & Status Pipeline</h3>
+            <a href="#browse" class="view-all-link" data-action-view="browse">View All Listings &rarr;</a>
+          </div>
+          <div class="table-responsive">
+            <table class="activity-table">
+              <thead>
+                <tr>
+                  <th>Food Item</th>
+                  <th>Category</th>
+                  <th>Quantity</th>
+                  <th>Donor</th>
+                  <th>Pickup Deadline</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="dashboardActivityTableBody">
+                <!-- Dynamically populated by app.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: BROWSE FOOD VIEW -->
+    <section id="view-browse" class="app-view">
+      <div class="container" style="padding-top: 3rem;">
+        <div class="section-header">
+          <span class="section-subtitle">Real-Time Surplus Listings</span>
+          <h2 class="section-title">Browse Available Food Near You</h2>
+          <p class="section-desc">Shelters, community kitchens, and verified volunteers can claim and reserve surplus food below.</p>
+        </div>
+
+        <!-- Filter & Search Controls Bar -->
+        <div class="browse-controls-panel">
+          <div class="search-filter-row">
+            <div class="search-input-box">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="browseSearchInput" placeholder="Search by food name, bakery, or location..." aria-label="Search food listings">
+            </div>
+
+            <div class="filter-select">
+              <select id="dietarySelect" aria-label="Filter by dietary preference">
+                <option value="all">All Dietary Preferences</option>
+                <option value="Vegetarian">Vegetarian Only</option>
+                <option value="Vegan">Vegan Only</option>
+              </select>
+            </div>
+
+            <div class="sort-select-box">
+              <select id="sortSelect" aria-label="Sort listings">
+                <option value="deadline-asc">Expiring Soonest</option>
+                <option value="newest">Newest First</option>
+                <option value="qty-desc">Largest Quantity</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Category Pills (Clean text & badges) -->
+          <div class="category-pills" role="tablist" aria-label="Food category filters">
+            <button class="cat-pill active" data-category="all">All Categories</button>
+            <button class="cat-pill" data-category="Bakery">Bakery & Bread</button>
+            <button class="cat-pill" data-category="Produce">Fresh Produce</button>
+            <button class="cat-pill" data-category="Prepared Meals">Prepared Meals</button>
+            <button class="cat-pill" data-category="Dairy & Groceries">Dairy & Pantry</button>
+          </div>
+        </div>
+
+        <!-- Food Cards Grid -->
+        <div class="food-cards-grid" id="foodCardsGrid" role="feed" aria-busy="false">
+          <!-- Dynamically populated by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 4: ADD FOOD VIEW -->
+    <section id="view-add" class="app-view">
+      <div class="container" style="padding-top: 3rem;">
+        <div class="section-header">
+          <span class="section-subtitle">Surplus Food Rescue Registration</span>
+          <h2 class="section-title">Donate Surplus Food</h2>
+          <p class="section-desc">Fill in details below to list excess food for immediate rescue by local charities.</p>
+        </div>
+
+        <div class="form-preview-grid">
+          <!-- Form Panel -->
+          <div class="form-panel">
+            <form id="addFoodForm">
+              <div class="form-group">
+                <label for="foodNameInput" class="form-label">
+                  Food Item Name <span class="required">*</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="foodNameInput" 
+                  class="form-control" 
+                  placeholder="e.g. Sourdough Loaves & Croissant Assortment" 
+                  required
+                >
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="categorySelect" class="form-label">
+                    Category <span class="required">*</span>
+                  </label>
+                  <select id="categorySelect" class="form-control" required>
+                    <option value="Bakery">Bakery & Bread</option>
+                    <option value="Produce">Fresh Produce</option>
+                    <option value="Prepared Meals">Prepared Meals</option>
+                    <option value="Dairy & Groceries">Dairy & Groceries</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Dietary Type</label>
+                  <div style="display: flex; gap: 1rem; align-items: center; padding-top: 0.5rem;">
+                    <label style="font-size: 0.875rem; display: flex; align-items: center; gap: 0.35rem; cursor: pointer;">
+                      <input type="radio" name="dietary" value="Vegetarian" checked> Vegetarian
+                    </label>
+                    <label style="font-size: 0.875rem; display: flex; align-items: center; gap: 0.35rem; cursor: pointer;">
+                      <input type="radio" name="dietary" value="Vegan"> Vegan
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="quantityInput" class="form-label">
+                    Quantity / Count <span class="required">*</span>
+                  </label>
+                  <input 
+                    type="number" 
+                    id="quantityInput" 
+                    class="form-control" 
+                    placeholder="e.g. 15" 
+                    min="1" 
+                    step="0.5" 
+                    required
+                  >
+                </div>
+
+                <div class="form-group">
+                  <label for="unitInput" class="form-label">
+                    Unit / Portions <span class="required">*</span>
+                  </label>
+                  <input 
+                    type="text" 
+                    id="unitInput" 
+                    class="form-control" 
+                    placeholder="e.g. items (~8 kg) or boxes" 
+                    required
+                  >
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="locationInput" class="form-label">
+                  Pickup Location & Address <span class="required">*</span>
+                </label>
+                <div style="display: flex; gap: 0.5rem;">
+                  <input 
+                    type="text" 
+                    id="locationInput" 
+                    class="form-control" 
+                    placeholder="e.g. 42 Green St, Downtown Market" 
+                    required
+                  >
+                  <button type="button" id="detectLocationBtn" class="btn btn-secondary btn-sm" style="white-space: nowrap;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                    Current Location
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="deadlineInput" class="form-label">
+                  Pickup Deadline (Expiry) <span class="required">*</span>
+                </label>
+                <input 
+                  type="datetime-local" 
+                  id="deadlineInput" 
+                  class="form-control" 
+                  required
+                >
+                <small style="color: #64748B; font-size: 0.775rem;">Food will be marked urgent as deadline nears.</small>
+              </div>
+
+              <div class="form-group">
+                <label for="imageUrlInput" class="form-label">Food Image URL</label>
+                <input 
+                  type="url" 
+                  id="imageUrlInput" 
+                  class="form-control" 
+                  placeholder="https://images.unsplash.com/..."
+                >
+                <div class="preset-photo-pills">
+                  <span style="font-size: 0.775rem; color: #64748B; margin-right: 0.25rem;">Quick Presets:</span>
+                  <button type="button" class="photo-pill" data-preset="bakery">Bakery</button>
+                  <button type="button" class="photo-pill" data-preset="produce">Produce</button>
+                  <button type="button" class="photo-pill" data-preset="prepared">Prepared</button>
+                  <button type="button" class="photo-pill" data-preset="dairy">Dairy</button>
+                  <button type="button" class="photo-pill" data-preset="fruits">Fruits</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="notesInput" class="form-label">Storage & Handling Instructions</label>
+                <textarea 
+                  id="notesInput" 
+                  class="form-control" 
+                  rows="3" 
+                  placeholder="e.g. Kept chilled under 4°C. Please bring insulated bag for transport."
+                ></textarea>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="donorNameInput" class="form-label">
+                    Donor / Business Name <span class="required">*</span>
+                  </label>
+                  <input 
+                    type="text" 
+                    id="donorNameInput" 
+                    class="form-control" 
+                    placeholder="e.g. Artisan Flour Bakery" 
+                    required 
+                    value="My Local Kitchen"
+                  >
+                </div>
+                <div class="form-group">
+                  <label for="donorPhoneInput" class="form-label">Contact Phone</label>
+                  <input 
+                    type="tel" 
+                    id="donorPhoneInput" 
+                    class="form-control" 
+                    placeholder="+91 98765-43210"
+                  >
+                </div>
+              </div>
+
+              <div class="form-actions" style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                <button type="submit" class="btn btn-primary btn-lg" style="flex: 1;">
+                  Publish Food Donation Listing
+                </button>
+                <button type="reset" class="btn btn-secondary">
+                  Reset
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Live Card Preview Sidebar -->
+          <div class="preview-sidebar">
+            <div style="font-size: 0.85rem; font-weight: 700; color: #64748B; margin-bottom: 0.75rem; text-transform: uppercase;">
+              Live Card Preview
+            </div>
+            
+            <article class="food-card preview-card">
+              <div class="food-card-media">
+                <img 
+                  id="previewImg" 
+                  src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80" 
+                  alt="Listing preview" 
+                  class="food-card-img"
+                />
+                <span class="food-badge-category" id="previewCategory">Bakery</span>
+                <span class="food-badge-status status-available">Available</span>
+              </div>
+              <div class="food-card-body">
+                <h3 class="food-card-title" id="previewTitle">Item Name Preview</h3>
+                <div class="food-card-donor">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  <span id="previewDonor">My Local Kitchen</span>
+                </div>
+                <div class="food-card-meta-list">
+                  <div class="meta-row">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <span id="previewLocation">Location Address</span>
+                  </div>
+                  <div class="meta-row">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span id="previewDeadline">Today</span>
+                  </div>
+                </div>
+                <div class="food-card-footer">
+                  <div class="quantity-tag" id="previewQuantity">
+                    10 items
+                  </div>
+                  <button class="btn btn-primary btn-sm" disabled style="opacity: 0.7;">
+                    Reserve Food
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Food Safety Checklist Card -->
+            <div style="margin-top: 1.5rem; background: #FFFFFF; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.25rem;">
+              <h4 style="font-size: 0.95rem; font-weight: 800; color: #0A1931; margin-bottom: 0.75rem;">
+                Food Safety Standards
+              </h4>
+              <ul style="list-style: none; font-size: 0.8rem; color: #475569; display: flex; flex-direction: column; gap: 0.5rem;">
+                <li style="display: flex; gap: 0.5rem; align-items: flex-start;">
+                  <span style="color: #10B981; font-weight: bold;">✓</span> Cooked food must be refrigerated within 2 hours of prep.
+                </li>
+                <li style="display: flex; gap: 0.5rem; align-items: flex-start;">
+                  <span style="color: #10B981; font-weight: bold;">✓</span> Clean, food-grade packaging must be used.
+                </li>
+                <li style="display: flex; gap: 0.5rem; align-items: flex-start;">
+                  <span style="color: #10B981; font-weight: bold;">✓</span> Allergen info must be stated in notes if applicable.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 5: PICKUPS / RESERVATIONS VIEW -->
+    <section id="view-reservations" class="app-view">
+      <div class="container" style="padding-top: 3rem;">
+        <div class="section-header">
+          <span class="section-subtitle">Volunteer & Courier Task Board</span>
+          <h2 class="section-title">Active Pickup & Delivery Tasks</h2>
+          <p class="section-desc">Manage reserved donations, verify pickup PINs, and update delivery milestones in real-time.</p>
+        </div>
+
+        <div id="reservationsContainer">
+          <!-- Dynamically populated by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 6: MY DONATIONS VIEW -->
+    <section id="view-my-donations" class="app-view">
+      <div class="container" style="padding-top: 3rem;">
+        <div class="section-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <span class="section-subtitle">Donor Portal</span>
+            <h2 class="section-title">My Posted Food Donations</h2>
+            <p class="section-desc">Review, edit, or track pickups for items you have published to the network.</p>
+          </div>
+          <button class="btn btn-primary" data-action-view="add">
+            + Post Another Donation
+          </button>
+        </div>
+
+        <div id="myDonationsContainer">
+          <!-- Dynamically populated by app.js -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       MODALS
+       ========================================================================= -->
+
+  <!-- Authentication & Registration Modal -->
+  <div class="modal-overlay" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
+    <div class="modal-dialog auth-modal-dialog">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title" id="authModalTitle">Welcome to FoodLoop</h3>
+          <p class="modal-subtitle" id="authModalSubtitle" style="font-size: 0.85rem; color: #64748B; margin-top: 2px;">Sign in or create an account</p>
+        </div>
+        <button class="modal-close-btn modal-close-trigger" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <!-- Auth Tabs -->
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab-btn active" id="tabRegisterBtn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+          Register
+        </button>
+        <button type="button" class="auth-tab-btn" id="tabSignInBtn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+          Sign In
+        </button>
+      </div>
+
+      <!-- Register Form Panel (Only Required Fields: Full Name, Mobile Number, Email Address, Area, Shelter, Password) -->
+      <form id="registerForm" class="auth-form-panel active">
+        <div class="modal-body auth-modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="regName" class="form-label">Full Name *</label>
+              <input type="text" id="regName" class="form-control" placeholder="Adarsh Sharma" required>
+            </div>
+            <div class="form-group">
+              <label for="regPhone" class="form-label">Mobile Number *</label>
+              <input type="tel" id="regPhone" class="form-control" placeholder="+91 98765 43210" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="regEmail" class="form-label">Email Address *</label>
+              <input type="email" id="regEmail" class="form-control" placeholder="adarsh@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="regCity" class="form-label">Area *</label>
+              <input type="text" id="regCity" class="form-control" placeholder="Sector 62, Noida" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="regOrg" class="form-label">Shelter (Optional)</label>
+              <input type="text" id="regOrg" class="form-control" placeholder="Hope Community Kitchen">
+            </div>
+            <div class="form-group">
+              <label for="regPassword" class="form-label">Password *</label>
+              <input type="password" id="regPassword" class="form-control" placeholder="Create password" value="pass123" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn btn-primary" style="flex: 1;">
+            Register &rarr;
+          </button>
+        </div>
+      </form>
+
+      <!-- Sign In Form Panel -->
+      <form id="signInForm" class="auth-form-panel">
+        <div class="modal-body auth-modal-body">
+          <div class="form-group">
+            <label for="loginEmail" class="form-label">Email or Mobile Number *</label>
+            <input type="text" id="loginEmail" class="form-control" placeholder="asha@shelter.org or +91 98765 01234" required>
+          </div>
+          <div class="form-group">
+            <label for="loginPassword" class="form-label">Password *</label>
+            <input type="password" id="loginPassword" class="form-control" placeholder="Enter password" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn btn-primary" style="flex: 1;">
+            Sign In &rarr;
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- User Profile & ID Modal -->
+  <div class="modal-overlay" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="profileModalTitle">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="profileModalTitle">My FoodLoop ID & Account</h3>
+        <button class="modal-close-btn modal-close-trigger" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="profile-card-header">
+          <div class="profile-avatar-large" id="profileModalAvatar">A</div>
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+              <h4 id="profileModalName" style="font-size: 1.25rem; font-weight: 800; color: #0A1931; margin: 0;">-</h4>
+              <span class="role-badge" id="profileModalRoleBadge">Recipient</span>
+            </div>
+            <div style="font-size: 0.85rem; color: #64748B; margin-top: 4px;">
+              FoodLoop ID: <strong id="profileModalId" style="color: #059669; font-family: monospace; font-size: 0.95rem;">-</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-info-grid">
+          <div class="profile-info-item">
+            <span class="info-label">Email:</span>
+            <span class="info-value" id="profileModalEmail">-</span>
+          </div>
+          <div class="profile-info-item">
+            <span class="info-label">Phone:</span>
+            <span class="info-value" id="profileModalPhone">-</span>
+          </div>
+          <div class="profile-info-item">
+            <span class="info-label">Organization:</span>
+            <span class="info-value" id="profileModalOrg">-</span>
+          </div>
+          <div class="profile-info-item">
+            <span class="info-label">City / Region:</span>
+            <span class="info-value" id="profileModalCity">-</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; margin-top: 1.25rem;">
+          <button type="button" class="btn btn-secondary btn-sm" id="profileGoBrowseBtn" style="flex: 1;">
+            🍱 Browse Food
+          </button>
+          <button type="button" class="btn btn-primary btn-sm" id="profileGoDonateBtn" style="flex: 1;">
+            🏢 + Donate Food
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer" style="justify-content: space-between;">
+        <button type="button" class="btn btn-secondary modal-close-trigger">Close</button>
+        <button type="button" class="btn btn-outline-danger" id="profileLogoutBtn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          Sign Out
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reservation Claim Modal -->
+  <div class="modal-overlay" id="reserveModal" role="dialog" aria-modal="true" aria-labelledby="reserveModalTitle">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="reserveModalTitle">Reserve Food Donation</h3>
+        <button class="modal-close-btn modal-close-trigger" aria-label="Close dialog">&times;</button>
+      </div>
+      <form id="reserveForm">
+        <div class="modal-body">
+          <div style="background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.25rem;">
+            <div style="font-size: 0.775rem; text-transform: uppercase; color: #065F46; font-weight: 800;">Item Selected</div>
+            <h4 id="reserveFoodName" style="font-size: 1.15rem; font-weight: 800; color: #0A1931; margin: 0.25rem 0;">-</h4>
+            <div style="font-size: 0.85rem; color: #475569;">
+              Donor: <strong id="reserveDonorName">-</strong> | Quantity: <strong id="reserveAvailableQty">-</strong>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="reserveRecipientName" class="form-label">Volunteer / Courier Name</label>
+            <input type="text" id="reserveRecipientName" class="form-control" required value="Adarsh (Demo Volunteer)">
+          </div>
+
+          <div class="form-group">
+            <label for="reserveRecipientOrg" class="form-label">Receiving Charity / Shelter</label>
+            <input type="text" id="reserveRecipientOrg" class="form-control" required value="Hope Street Community Kitchen">
+          </div>
+
+          <div style="font-size: 0.825rem; color: #64748B;">
+            Reserving will hold this donation exclusively for your pickup and generate a verification PIN.
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn btn-primary">Confirm Reservation</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Edit Listing Modal -->
+  <div class="modal-overlay" id="editModal" role="dialog" aria-modal="true" aria-labelledby="editModalTitle">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="editModalTitle">Edit Donation Listing</h3>
+        <button class="modal-close-btn modal-close-trigger" aria-label="Close dialog">&times;</button>
+      </div>
+      <form id="editForm">
+        <input type="hidden" id="editFoodId">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="editFoodName" class="form-label">Food Title</label>
+            <input type="text" id="editFoodName" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="editQuantity" class="form-label">Quantity</label>
+            <input type="number" id="editQuantity" class="form-control" min="1" step="0.5" required>
+          </div>
+          <div class="form-group">
+            <label for="editLocation" class="form-label">Pickup Location</label>
+            <input type="text" id="editLocation" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="editDeadline" class="form-label">Pickup Deadline</label>
+            <input type="datetime-local" id="editDeadline" class="form-control" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Global Toast Notification Container -->
+  <div id="toastContainer" aria-live="polite"></div>
+
+  <!-- =========================================================================
+       CLEAN PROFESSIONAL FOOTER WITH 24x7 HELPLINE & FAQS
+       ========================================================================= -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>
+            <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #FF6F00;"></span>
+            FoodLoop <span class="brand-tiranga-badge" style="font-size: 0.7rem; vertical-align: middle;">Bharat 🇮🇳</span>
+          </h4>
+          <p>
+            A smart surplus food redistribution network connecting local bakeries, caterers, and households with shelters and community kitchens to eliminate hunger and prevent landfill waste.
+          </p>
+          <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); padding: 6px 14px; border-radius: var(--radius-full); font-size: 0.8rem; color: #FF9933; font-weight: 700;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Verified Community Food Rescue Initiative</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Quick Portals</h5>
+          <ul>
+            <li><a href="#home" onclick="window.FoodLoopApp.navigateTo('home')">&rarr; Home (Portal)</a></li>
+            <li><a href="#browse" onclick="window.FoodLoopApp.navigateTo('browse')">&rarr; Browse Surplus Food</a></li>
+            <li><a href="#add" onclick="window.FoodLoopApp.navigateTo('add')">&rarr; Donate Food</a></li>
+            <li><a href="#reservations" onclick="window.FoodLoopApp.navigateTo('reservations')">&rarr; Pickup Pipeline</a></li>
+            <li><a href="#dashboard" onclick="window.FoodLoopApp.navigateTo('dashboard')">&rarr; Live Dashboard Stats</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Knowledge & System</h5>
+          <ul>
+            <li><a href="explain.html">&rarr; System Guide (Kaise Kaam Karta Hai)</a></li>
+            <li><a href="technology.html">&rarr; Technical Architecture</a></li>
+            <li><a href="FoodLoop.apk">&rarr; Download Android APK (5.8 MB)</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Support & Safety</h5>
+          <ul>
+            <li><a href="explain.html">&rarr; Food Safety Standards</a></li>
+            <li><a href="explain.html">&rarr; Good Samaritan Protection</a></li>
+          </ul>
+          <div class="footer-helpline-card">
+            <h5>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              24x7 Seva Helpline
+            </h5>
+            <span class="footer-helpline-num">1800-FOOD-LOOP</span>
+            <div class="footer-helpline-sub">Toll-Free Emergency Rescue Helpline: 1800-3663-5667 | support@foodloop.org.in</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dedicated Footer FAQs Section -->
+      <div class="footer-faq-section">
+        <div class="footer-faq-header">
+          <span>Aam Sawal • Frequently Asked Questions</span>
+          <h4>Quick Answers for Donors & Volunteers</h4>
+        </div>
+        <div class="footer-faq-grid">
+          <div class="faq-card">
+            <h6>❓ Khana kaun le sakta hai? (Who can claim?)</h6>
+            <p>Vetted non-profit shelters, orphanages, community kitchens, aur verified volunteers apne ilaake me surplus food bina kisi shulk (100% Free) claim kar sakte hain.</p>
+          </div>
+          <div class="faq-card">
+            <h6>🛡️ Kya ye khana surakshit hota hai? (Is it safe?)</h6>
+            <p>Haan. Sabhi listings Good Samaritan food safety norms aur cold-chain temperature rules ke tehat aati hain. Donor har daan se pehle freshness check verify karta hai.</p>
+          </div>
+          <div class="faq-card">
+            <h6>🛵 Volunteer ko pickup kaise karna hota hai?</h6>
+            <p>Item reserve karte hi aapko ek unique PIN milta hai (jaise FL-101). Donor ke location par PIN dikhakar pickup confirm karein aur shelter tak deliver karein.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 FoodLoop - Food Waste Reduction & Redistribution System. Made with Pride for Zero Hunger.
+        </div>
+        <div class="footer-bottom-links">
+          <a href="#home" onclick="window.FoodLoopApp.navigateTo('home')">Home</a>
+          <a href="#browse" onclick="window.FoodLoopApp.navigateTo('browse')">Browse</a>
+          <a href="explain.html">System Guide</a>
+          <a href="technology.html">Tech Stack</a>
+          <a href="FoodLoop.apk" style="color: var(--color-saffron); font-weight: 800;">Get Android APK &darr;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

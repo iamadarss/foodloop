@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In / Register — FoodLoop</title>
+  <meta name="description" content="Sign in or register for FoodLoop to rescue surplus food or donate excess meals.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 50%, #ECFDF5 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem 1rem;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    .auth-page-container {
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .auth-brand-header {
+      text-align: center;
+      margin-bottom: 1.75rem;
+    }
+
+    .auth-brand-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: #0A1931;
+      font-size: 1.6rem;
+      font-weight: 800;
+    }
+
+    .auth-brand-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+    }
+
+    .auth-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 18px;
+      padding: 2rem 2.25rem;
+      box-shadow: 0 10px 30px -5px rgba(10, 25, 49, 0.08), 0 4px 6px -2px rgba(10, 25, 49, 0.04);
+    }
+
+    .auth-tab-nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: #F1F5F9;
+      padding: 4px;
+      border-radius: 12px;
+      margin-bottom: 1.75rem;
+      gap: 4px;
+    }
+
+    .auth-tab-btn {
+      padding: 0.65rem 0.5rem;
+      border: none;
+      background: transparent;
+      border-radius: 9px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #64748B;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .auth-tab-btn.active {
+      background: #FFFFFF;
+      color: #0A1931;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    }
+
+    .form-minimal-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-minimal-label {
+      display: block;
+      font-size: 0.825rem;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 0.4rem;
+    }
+
+    .form-minimal-input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: #0F172A;
+      background: #FFFFFF;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      box-sizing: border-box;
+    }
+
+    .form-minimal-input:focus {
+      outline: none;
+      border-color: #059669;
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+    }
+
+    /* Minimal Role Selection */
+    .role-selection-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .role-choice-card {
+      border: 1.5px solid #E2E8F0;
+      border-radius: 10px;
+      padding: 0.85rem 0.65rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: #F8FAFC;
+    }
+
+    .role-choice-card:hover {
+      border-color: #94A3B8;
+    }
+
+    .role-choice-card.selected {
+      border-color: #059669;
+      background: #ECFDF5;
+    }
+
+    .role-choice-card input[type="radio"] {
+      display: none;
+    }
+
+    .role-choice-icon {
+      font-size: 1.35rem;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .role-choice-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #0F172A;
+      display: block;
+    }
+
+    .btn-auth-submit {
+      width: 100%;
+      padding: 0.85rem 1.25rem;
+      background: #059669;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      box-shadow: 0 4px 10px rgba(5, 150, 105, 0.25);
+    }
+
+    .btn-auth-submit:hover {
+      background: #047857;
+      transform: translateY(-1px);
+    }
+
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      margin: 1.5rem 0 1rem;
+      color: #94A3B8;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .auth-divider::before, .auth-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #E2E8F0;
+    }
+
+    .auth-divider span {
+      padding: 0 0.75rem;
+    }
+
+    .demo-btn-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .btn-demo-quick {
+      padding: 0.6rem 0.5rem;
+      border: 1px solid #CBD5E1;
+      background: #F8FAFC;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .btn-demo-quick:hover {
+      background: #EEF2F6;
+      border-color: #94A3B8;
+    }
+
+    .auth-footer-nav {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .auth-footer-nav a {
+      color: #64748B;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .auth-footer-nav a:hover {
+      color: #059669;
+    }
+
+    .auth-alert {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      margin-bottom: 1.25rem;
+      display: none;
+    }
+
+    .auth-alert-error {
+      background: #FEF2F2;
+      border: 1px solid #FCA5A5;
+      color: #991B1B;
+    }
+
+    .auth-alert-success {
+      background: #ECFDF5;
+      border: 1px solid #6EE7B7;
+      color: #065F46;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-page-container">
+    <!-- Brand Logo -->
+    <div class="auth-brand-header">
+      <a href="index.html" class="auth-brand-logo">
+        <div class="auth-brand-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18.178 8c5.096 0 5.096 8 0 8-5.095 0-7.083-8-12.178-8-5.096 0-5.096 8 0 8 5.095 0 7.083-8 12.178-8z"/>
+            <path d="M12 6.5c-1 1.5-1 3.5 0 5"/>
+          </svg>
+        </div>
+        <span>Food<span style="color: #059669;">Loop</span></span>
+      </a>
+      <p style="color: #64748B; font-size: 0.875rem; margin-top: 0.4rem; font-weight: 500;">
+        Zero Food Waste • Community Nourishment
+      </p>
+    </div>
+
+    <!-- Auth Card -->
+    <div class="auth-card">
+      <div id="authAlert" class="auth-alert"></div>
+
+      <!-- Tab Switcher -->
+      <div class="auth-tab-nav">
+        <button type="button" class="auth-tab-btn active" id="tabSignIn">Sign In</button>
+        <button type="button" class="auth-tab-btn" id="tabRegister">Register</button>
+      </div>
+
+      <!-- Minimal Sign In Form -->
+      <form id="signInFormMinimal">
+        <div class="form-minimal-group">
+          <label class="form-minimal-label" for="loginEmail">Email or Mobile</label>
+          <input type="text" id="loginEmail" class="form-minimal-input" placeholder="e.g. asha@shelter.org" required>
+        </div>
+
+        <div class="form-minimal-group">
+          <label class="form-minimal-label" for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" class="form-minimal-input" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit" class="btn-auth-submit">
+          Sign In &rarr;
+        </button>
+
+        <div class="auth-divider">
+          <span>Or Quick 1-Click Demo</span>
+        </div>
+
+        <div class="demo-btn-row">
+          <button type="button" class="btn-demo-quick" id="btnDemoRecipient">
+            🍱 Demo Recipient
+          </button>
+          <button type="button" class="btn-demo-quick" id="btnDemoDonor">
+            🏢 Demo Donor
+          </button>
+        </div>
+      </form>
+
+      <!-- Minimal Register Form -->
+      <form id="registerFormMinimal" style="display: none;">
+        <div class="form-minimal-group">
+          <label class="form-minimal-label">I want to:</label>
+          <div class="role-selection-grid">
+            <label class="role-choice-card selected" id="roleCardRecipient">
+              <input type="radio" name="regRole" value="recipient" checked>
+              <span class="role-choice-icon">🍱</span>
+              <span class="role-choice-title">Receive Food</span>
+            </label>
+            <label class="role-choice-card" id="roleCardDonor">
+              <input type="radio" name="regRole" value="donor">
+              <span class="role-choice-icon">🏢</span>
+              <span class="role-choice-title">Donate Food</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-minimal-group">
+          <label class="form-minimal-label" for="regName">Full Name</label>
+          <input type="text" id="regName" class="form-minimal-input" placeholder="e.g. Adarsh Sharma" required>
+        </div>
+
+        <div class="form-minimal-group">
+          <label class="form-minimal-label" for="regEmail">Email Address</label>
+          <input type="email" id="regEmail" class="form-minimal-input" placeholder="e.g. adarsh@example.com" required>
+        </div>
+
+        <div class="form-minimal-group">
+          <label class="form-minimal-label" for="regPassword">Password</label>
+          <input type="password" id="regPassword" class="form-minimal-input" placeholder="Choose a password" required>
+        </div>
+
+        <button type="submit" class="btn-auth-submit">
+          Create Account &rarr;
+        </button>
+      </form>
+    </div>
+
+    <!-- Return to App Link -->
+    <div class="auth-footer-nav">
+      <a href="index.html">&larr; Back to FoodLoop App</a>
+    </div>
+  </div>
+
+  <!-- Shared Data Script -->
+  <script src="js/data.js"></script>
+  <script>
+    (function() {
+      const tabSignIn = document.getElementById('tabSignIn');
+      const tabRegister = document.getElementById('tabRegister');
+      const signInForm = document.getElementById('signInFormMinimal');
+      const registerForm = document.getElementById('registerFormMinimal');
+      const authAlert = document.getElementById('authAlert');
+
+      const roleCardRecipient = document.getElementById('roleCardRecipient');
+      const roleCardDonor = document.getElementById('roleCardDonor');
+
+      function showAlert(msg, isSuccess = false) {
+        authAlert.textContent = msg;
+        authAlert.className = isSuccess ? 'auth-alert auth-alert-success' : 'auth-alert auth-alert-error';
+        authAlert.style.display = 'block';
+      }
+
+      function hideAlert() {
+        authAlert.style.display = 'none';
+      }
+
+      // Tab Toggling
+      tabSignIn.addEventListener('click', () => {
+        tabSignIn.classList.add('active');
+        tabRegister.classList.remove('active');
+        signInForm.style.display = 'block';
+        registerForm.style.display = 'none';
+        hideAlert();
+      });
+
+      tabRegister.addEventListener('click', () => {
+        tabRegister.classList.add('active');
+        tabSignIn.classList.remove('active');
+        registerForm.style.display = 'block';
+        signInForm.style.display = 'none';
+        hideAlert();
+      });
+
+      // Role selection styling
+      roleCardRecipient.addEventListener('click', () => {
+        roleCardRecipient.classList.add('selected');
+        roleCardDonor.classList.remove('selected');
+      });
+      roleCardDonor.addEventListener('click', () => {
+        roleCardDonor.classList.add('selected');
+        roleCardRecipient.classList.remove('selected');
+      });
+
+      // Quick Demo Logins
+      document.getElementById('btnDemoRecipient').addEventListener('click', () => {
+        try {
+          const user = window.FoodLoopData.loginUser('asha@shelter.org', 'password123');
+          showAlert(`Signed in as ${user.name}! Redirecting...`, true);
+          setTimeout(() => { window.location.href = 'index.html#browse'; }, 700);
+        } catch (err) {
+          showAlert(err.message);
+        }
+      });
+
+      document.getElementById('btnDemoDonor').addEventListener('click', () => {
+        try {
+          const user = window.FoodLoopData.loginUser('donor@dailybake.com', 'password123');
+          showAlert(`Signed in as ${user.name}! Redirecting...`, true);
+          setTimeout(() => { window.location.href = 'index.html#dashboard'; }, 700);
+        } catch (err) {
+          showAlert(err.message);
+        }
+      });
+
+      // Sign In Submit
+      signInForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        hideAlert();
+        const emailOrPhone = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value;
+
+        try {
+          const user = window.FoodLoopData.loginUser(emailOrPhone, password);
+          showAlert(`Welcome back, ${user.name}! Redirecting...`, true);
+          setTimeout(() => {
+            window.location.href = user.role === 'donor' ? 'index.html#my-donations' : 'index.html#browse';
+          }, 800);
+        } catch (err) {
+          showAlert(err.message);
+        }
+      });
+
+      // Register Submit
+      registerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        hideAlert();
+        const role = document.querySelector('input[name="regRole"]:checked').value;
+        const name = document.getElementById('regName').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const password = document.getElementById('regPassword').value;
+
+        try {
+          const user = window.FoodLoopData.registerUser({
+            name,
+            email,
+            password,
+            role,
+            phone: '+91 98000 12345',
+            city: 'Delhi NCR'
+          });
+          showAlert(`Account created! FoodLoop ID: ${user.id}. Redirecting...`, true);
+          setTimeout(() => {
+            window.location.href = role === 'donor' ? 'index.html#add' : 'index.html#browse';
+          }, 900);
+        } catch (err) {
+          showAlert(err.message);
+        }
+      });
+
+      // Check URL query parameters (e.g. ?mode=register)
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('mode') === 'register') {
+        tabRegister.click();
+      }
+    })();
+  </script>
+</body>
+</html>

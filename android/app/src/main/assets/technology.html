@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FoodLoop — Architecture & Technology Documentation</title>
+  <meta name="description" content="Technical documentation and architecture specification for FoodLoop — Food Waste Reduction System. Explaining the technology stack, algorithmic workflows, and design patterns.">
+  
+  <!-- Modern Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    .tech-hero {
+      background: linear-gradient(135deg, #0A1931 0%, #050D1A 100%);
+      color: white;
+      padding: 4.5rem 0 3.5rem;
+      border-bottom: 4px solid var(--color-saffron);
+    }
+    .tech-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 111, 0, 0.2);
+      border: 1px solid rgba(255, 111, 0, 0.4);
+      color: #FFEDD5;
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+    .tech-card {
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+      transition: all var(--transition-normal);
+    }
+    .tech-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: rgba(255, 111, 0, 0.3);
+    }
+    .tech-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .tech-icon-box {
+      width: 3.25rem;
+      height: 3.25rem;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .tech-stack-pill-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 1.25rem;
+    }
+    .tech-pill {
+      background: #F1F5F9;
+      border: 1px solid #CBD5E1;
+      color: #0A1931;
+      font-size: 0.825rem;
+      font-weight: 700;
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .workflow-flowchart {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 1.5rem 0;
+    }
+    .flow-node {
+      background: white;
+      border: 1px solid #CBD5E1;
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #0A1931;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .flow-arrow {
+      color: var(--color-saffron);
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+    .code-snippet {
+      background: #0F172A;
+      color: #F8FAFC;
+      padding: 1.25rem 1.5rem;
+      border-radius: var(--radius-md);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.85rem;
+      overflow-x: auto;
+      margin: 1.25rem 0;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Site Header -->
+  <header class="site-header">
+    <!-- Top Tiranga Ribbon Accent -->
+    <div class="tiranga-ribbon-bar"></div>
+    <div class="container">
+      <nav class="navbar" aria-label="Main Navigation">
+        <a href="index.html#home" class="brand-logo">
+          <div class="brand-icon-wrapper" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12"/>
+              <path d="M12 2c3.5 3.5 3.5 8.5 0 12-3.5-3.5-3.5-8.5 0-12z"/>
+              <path d="M7 17l5-5 5 5"/>
+            </svg>
+          </div>
+          <span class="brand-text">Food<span class="highlight">Loop</span> <span class="brand-tiranga-badge">Bharat 🇮🇳</span></span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="index.html#home" class="nav-link">Home</a></li>
+          <li><a href="index.html#browse" class="nav-link">Browse Food</a></li>
+          <li><a href="index.html#dashboard" class="nav-link">Dashboard</a></li>
+          <li><a href="index.html#reservations" class="nav-link">Pickups</a></li>
+          <li><a href="technology.html" class="nav-link active">Tech Stack</a></li>
+          <li><a href="index.html#home" class="nav-link nav-auth-btn">Login / Register</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Tech Hero -->
+  <section class="tech-hero">
+    <div class="container">
+      <div class="tech-badge">
+        <span>⚡</span> Architecture & System Specifications
+      </div>
+      <h1 style="font-size: 2.85rem; font-weight: 800; line-height: 1.2; margin-bottom: 1rem;">
+        Under the Hood of <span style="color: #FF9933;">FoodLoop</span>
+      </h1>
+      <p style="font-size: 1.15rem; color: #CBD5E1; max-width: 720px; line-height: 1.6;">
+        Explore the engineering principles, frontend architecture, reactive data lifecycle, and environmental impact algorithms that power the Food Waste Reduction System.
+      </p>
+      <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="index.html#browse" class="btn btn-primary">
+          Launch Application Demo
+        </a>
+        <a href="explain.html" class="btn btn-secondary">
+          Read User Explanation Guide
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Tech Content -->
+  <main class="container" style="padding: 4rem 1.25rem;">
+
+    <!-- 1. Technical Stack Overview -->
+    <article class="tech-card">
+      <div class="tech-card-header">
+        <div class="tech-icon-box" style="background: var(--color-saffron-light); color: var(--color-saffron-hover);">⚙️</div>
+        <div>
+          <h2 style="font-size: 1.5rem; font-weight: 800; color: #0A1931;">1. Core Technology Stack</h2>
+          <p style="font-size: 0.9rem; color: #64748B;">Built cleanly with modern web standards, zero bulky dependencies, and instant load times.</p>
+        </div>
+      </div>
+
+      <p style="font-size: 0.95rem; color: #334155; line-height: 1.6; margin-bottom: 1rem;">
+        FoodLoop was engineered prioritizing lightning-fast rendering, zero layout shift, low battery consumption on mobile devices, and full offline persistence through modern browser APIs:
+      </p>
+
+      <div class="tech-stack-pill-grid">
+        <span class="tech-pill">📄 <strong>HTML5</strong> Semantic Markup</span>
+        <span class="tech-pill">🎨 <strong>Vanilla CSS3</strong> Custom Properties & Flexbox/Grid</span>
+        <span class="tech-pill">⚡ <strong>ES6+ JavaScript</strong> Modular Event Architecture</span>
+        <span class="tech-pill">💾 <strong>Web Storage API</strong> (LocalStorage Persistence)</span>
+        <span class="tech-pill">📊 <strong>Dynamic SVG</strong> Data Visualization Engine</span>
+        <span class="tech-pill">📱 <strong>Android APK</strong> WebView Bridge Bundle (Offline Capable)</span>
+        <span class="tech-pill">🔒 <strong>Client-Side Validation</strong> & Security Sanitization</span>
+      </div>
+    </article>
+
+    <!-- 2. End-to-End Workflow & Pipeline -->
+    <article class="tech-card">
+      <div class="tech-card-header">
+        <div class="tech-icon-box" style="background: #EFF6FF; color: #1E3A8A;">🔄</div>
+        <div>
+          <h2 style="font-size: 1.5rem; font-weight: 800; color: #0A1931;">2. End-to-End Food Rescue Pipeline</h2>
+          <p style="font-size: 0.9rem; color: #64748B;">Step-by-step state machine from initial donation listing to verified community delivery.</p>
+        </div>
+      </div>
+
+      <div class="workflow-flowchart">
+        <div class="flow-node">
+          <strong>1. Add Food</strong><br>
+          <small>Donor lists item & deadline</small>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-node">
+          <strong>2. Browse Food</strong><br>
+          <small>Volunteers filter & inspect</small>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-node">
+          <strong>3. Reserve Food</strong><br>
+          <small>PIN generated, lock state</small>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-node">
+          <strong>4. Pickup Handover</strong><br>
+          <small>Status &rarr; Picked Up</small>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-node">
+          <strong>5. Mark Delivered</strong><br>
+          <small>Impact logged & stats refresh</small>
+        </div>
+      </div>
+
+      <h4 style="font-size: 1.1rem; font-weight: 700; color: #0A1931; margin: 1.5rem 0 0.5rem;">Pipeline State Transition Machine:</h4>
+      <p style="font-size: 0.925rem; color: #475569; line-height: 1.6;">
+        The system enforces strict state machine transitions in <code>DataService.updateReservationStatus</code>:
+      </p>
+      <div class="code-snippet">
+const validTransitions = {
+  'Reserved': ['Picked Up', 'Cancelled'],
+  'Picked Up': ['Delivered'],
+  'Delivered': [],    // Final state (immutable record)
+  'Cancelled': []    // Restores donation back to 'Available'
+};
+      </div>
+    </article>
+
+    <!-- 3. Key Algorithmic Components -->
+    <article class="tech-card">
+      <div class="tech-card-header">
+        <div class="tech-icon-box" style="background: var(--color-green-light); color: var(--color-green);">🧮</div>
+        <div>
+          <h2 style="font-size: 1.5rem; font-weight: 800; color: #0A1931;">3. Intelligent Algorithms & Calculations</h2>
+          <p style="font-size: 0.9rem; color: #64748B;">Calculations driving nutritional and environmental metrics in FoodLoop.</p>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+        <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: var(--radius-md); padding: 1.5rem;">
+          <h4 style="font-size: 1.05rem; font-weight: 700; color: #0A1931; margin-bottom: 0.5rem;">Duplicate Prevention Engine</h4>
+          <p style="font-size: 0.875rem; color: #64748B; line-height: 1.5;">
+            Prevents multiple charities or couriers from claiming the same perishable stock. The claim validator verifies both listing availability and reservation queue status before committing atomic updates to storage.
+          </p>
+        </div>
+
+        <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: var(--radius-md); padding: 1.5rem;">
+          <h4 style="font-size: 1.05rem; font-weight: 700; color: #0A1931; margin-bottom: 0.5rem;">Carbon Footprint Avoidance Model</h4>
+          <p style="font-size: 0.875rem; color: #64748B; line-height: 1.5;">
+            Computes ecological savings utilizing verified UN FAO benchmarks: Every 1 kg of edible organic food diverted from municipal landfills prevents approximately <strong>1.9 kg CO2e</strong> in atmospheric methane emissions.
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 4. Interactive SVG Visualizations -->
+    <article class="tech-card">
+      <div class="tech-card-header">
+        <div class="tech-icon-box" style="background: var(--color-saffron-light); color: var(--color-saffron-hover);">📊</div>
+        <div>
+          <h2 style="font-size: 1.5rem; font-weight: 800; color: #0A1931;">4. Zero-Dependency SVG Visualizations</h2>
+          <p style="font-size: 0.9rem; color: #64748B;">Lightweight, responsive charts rendered directly via mathematical SVG generation.</p>
+        </div>
+      </div>
+
+      <p style="font-size: 0.95rem; color: #334155; line-height: 1.6; margin-bottom: 1rem;">
+        Instead of importing megabyte-heavy charting libraries (e.g. Chart.js, Highcharts), FoodLoop utilizes mathematical curve calculations (cubic Béziers) and circle stroke-dash geometry with Tiranga color mapping at under <strong>3 KB</strong> total script size:
+      </p>
+
+      <ul style="margin-left: 1.5rem; color: #475569; font-size: 0.925rem; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><strong>Trend Chart:</strong> Continuous cubic Bézier control points (<code>C cpX1 cpY1, cpX2 cpY2, x y</code>) with saffron-to-green gradient fills and interactive data point badges.</li>
+        <li><strong>Category Donut Chart:</strong> Dynamic <code>stroke-dasharray</code> and <code>stroke-dashoffset</code> mapped to category percentages with centered live tally.</li>
+        <li><strong>Reactive Re-rendering:</strong> Whenever a new donation is marked delivered, the charts automatically re-plot with new metrics.</li>
+      </ul>
+    </article>
+
+    <!-- 5. Future Scalability Roadmap -->
+    <article class="tech-card">
+      <div class="tech-card-header">
+        <div class="tech-icon-box" style="background: #F1F5F9; color: #0A1931;">🚀</div>
+        <div>
+          <h2 style="font-size: 1.5rem; font-weight: 800; color: #0A1931;">5. Production Scalability Roadmap</h2>
+          <p style="font-size: 0.9rem; color: #64748B;">Planned backend integrations and cloud architecture for citywide scale across India.</p>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;">
+        <div style="border: 1px solid #E2E8F0; border-radius: var(--radius-md); padding: 1.25rem;">
+          <h5 style="font-weight: 700; color: #0A1931; margin-bottom: 0.4rem;">Live WebSockets & Push</h5>
+          <p style="font-size: 0.825rem; color: #64748B;">Immediate volunteer dispatch broadcasts when bakery or banquet surplus is listed.</p>
+        </div>
+        <div style="border: 1px solid #E2E8F0; border-radius: var(--radius-md); padding: 1.25rem;">
+          <h5 style="font-weight: 700; color: #0A1931; margin-bottom: 0.4rem;">GIS Routing Optimization</h5>
+          <p style="font-size: 0.825rem; color: #64748B;">Integration with OpenStreetMap & Leaflet for optimized multi-stop volunteer cargo routes.</p>
+        </div>
+        <div style="border: 1px solid #E2E8F0; border-radius: var(--radius-md); padding: 1.25rem;">
+          <h5 style="font-weight: 700; color: #0A1931; margin-bottom: 0.4rem;">IoT Cold Chain Telemetry</h5>
+          <p style="font-size: 0.825rem; color: #64748B;">Bluetooth sensor loggers verifying safe temperatures (under 4°C) during hot prepared meal transit.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Return to App Banner -->
+    <div style="text-align: center; padding: 2rem 0;">
+      <a href="index.html#home" class="btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1.05rem;">
+        &larr; Return to Live FoodLoop Application
+      </a>
+    </div>
+
+  </main>
+
+  <!-- =========================================================================
+       REDESIGNED TIRANGA FOOTER
+       ========================================================================= -->
+  <footer class="site-footer">
+    <div class="footer-top-accent"></div>
+    <div class="container footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>
+            <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #FF6F00;"></span>
+            FoodLoop <span style="font-size: 1rem;">🇮🇳</span>
+          </h4>
+          <p>
+            Bharat Ka Zero Food Waste Mission — Shreshtha taze khane ko fenkne se bachakar har jarooratmand thali tak pahuchane wali ek aadhunik digital vyavastha.
+          </p>
+          <div class="footer-tiranga-badge">
+            <span style="color: #FF6F00;">● Kesariya</span>
+            <span style="color: #FFFFFF;">● Shwet</span>
+            <span style="color: #138808;">● Harit</span>
+            <span style="color: #93C5FD;">● Chakra</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Pramukh Sewayein</h5>
+          <ul>
+            <li><a href="index.html#home">&rarr; Mukhya Prishth (Home)</a></li>
+            <li><a href="index.html#browse">&rarr; Khana Khojein (Browse)</a></li>
+            <li><a href="index.html#add">&rarr; Khana Daan Karein (Donate)</a></li>
+            <li><a href="index.html#reservations">&rarr; Pickup Pipeline (Pickups)</a></li>
+            <li><a href="index.html#my-donations">&rarr; Meri Listings (My Donations)</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col green-col">
+          <h5>Jankari & Nitiyan</h5>
+          <ul>
+            <li><a href="explain.html">&rarr; Kaise Kaam Karta Hai (Guide)</a></li>
+            <li><a href="technology.html">&rarr; Technical Architecture</a></li>
+            <li><a href="index.html#impact">&rarr; Environmental Impact</a></li>
+            <li><a href="index.html#dashboard">&rarr; Live Dashboard Stats</a></li>
+            <li><a href="FoodLoop.apk">&rarr; Download Android APK (5.4 MB)</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col chakra-col">
+          <h5>Suraksha & Contact</h5>
+          <ul>
+            <li><a href="explain.html">&rarr; Food Safety Standards</a></li>
+            <li><a href="explain.html">&rarr; Good Samaritan Protection</a></li>
+            <li><a href="explain.html">&rarr; Cold-Chain Hygiene Rule</a></li>
+            <li><a href="#" onclick="alert('FoodLoop Volunteer Helpline: 1800-FOOD-LOOP (Demo)'); return false;">&rarr; Helpline & Support</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 FoodLoop — Food Waste Reduction System. Made with Pride for Zero Hunger.
+        </div>
+        <div class="footer-bottom-links">
+          <a href="index.html#home">Home</a>
+          <a href="explain.html">System Guide</a>
+          <a href="technology.html">Tech Stack</a>
+          <a href="FoodLoop.apk" style="color: #FF6F00; font-weight: 800;">Get Android APK &darr;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+# Gradle & Android Build Outputs
+.gradle/
+build/
+app/build/
+android/.gradle/
+android/build/
+android/app/build/
+*.hprof
+*.orig
+
+# Node / Dependencies
+node_modules/
+npm-debug.log*
+
+# System & IDE files
+.idea/
+*.iml
+.DS_Store
+Thumbs.db

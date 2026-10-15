@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How FoodLoop Works — Complete System Explanation & Guide (Kaise Kaam Karta Hai)</title>
+  <meta name="description" content="Detailed guide and explanation of FoodLoop — Food Waste Reduction System. Step-by-step workflow for food donors, volunteers, and shelters with Tiranga community impact.">
+  
+  <!-- Modern Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    .explain-hero {
+      background: radial-gradient(120% 120% at 50% 10%, #FFF7ED 0%, #FFFFFF 50%, #F0FDF4 100%);
+      padding: 4.5rem 0 3.5rem;
+      border-bottom: 1px solid var(--color-border);
+      text-align: center;
+    }
+    .explain-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--color-saffron-light);
+      border: 1px solid var(--color-saffron-subtle);
+      color: var(--color-saffron-hover);
+      padding: 0.4rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 800;
+      margin-bottom: 1.25rem;
+    }
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin: 2.5rem 0;
+    }
+    .role-card {
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 1.75rem;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+    }
+    .role-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+    .role-card.saffron-card { border-top: 4px solid var(--color-saffron); }
+    .role-card.green-card { border-top: 4px solid var(--color-green); }
+    .role-card.navy-card { border-top: 4px solid var(--color-chakra); }
+
+    .role-avatar {
+      width: 4rem;
+      height: 4rem;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 1.25rem;
+    }
+    .role-avatar.saffron-bg { background: var(--color-saffron-light); }
+    .role-avatar.green-bg { background: var(--color-green-light); }
+    .role-avatar.navy-bg { background: var(--color-navy-light); }
+
+    .flow-step-row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 1.75rem;
+      align-items: start;
+      margin-bottom: 2.5rem;
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-normal);
+    }
+    .flow-step-row:hover {
+      box-shadow: var(--shadow-md);
+      border-color: rgba(255, 111, 0, 0.3);
+    }
+    .flow-number-badge {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: white;
+      box-shadow: var(--shadow-sm);
+    }
+    .num-saffron { background: linear-gradient(135deg, #FF6F00 0%, #E65100 100%); }
+    .num-navy { background: linear-gradient(135deg, #1E3A8A 0%, #0A1931 100%); }
+    .num-green { background: linear-gradient(135deg, #138808 0%, #0A5C05 100%); }
+
+    .faq-accordion-item {
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 1.35rem 1.75rem;
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .faq-question {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--color-navy);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+    .faq-answer {
+      margin-top: 0.75rem;
+      font-size: 0.95rem;
+      color: #475569;
+      line-height: 1.6;
+    }
+    @media (max-width: 900px) {
+      .role-grid { grid-template-columns: 1fr; }
+      .flow-step-row { grid-template-columns: 1fr; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header class="site-header">
+    <!-- Top Tiranga Ribbon Accent -->
+    <div class="tiranga-ribbon-bar"></div>
+    <div class="container">
+      <nav class="navbar" aria-label="Main Navigation">
+        <a href="index.html#home" class="brand-logo">
+          <div class="brand-icon-wrapper" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12"/>
+              <path d="M12 2c3.5 3.5 3.5 8.5 0 12-3.5-3.5-3.5-8.5 0-12z"/>
+              <path d="M7 17l5-5 5 5"/>
+            </svg>
+          </div>
+          <span class="brand-text">Food<span class="highlight">Loop</span> <span class="brand-tiranga-badge">Bharat 🇮🇳</span></span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="index.html#home" class="nav-link">Home</a></li>
+          <li><a href="index.html#browse" class="nav-link">Browse Food</a></li>
+          <li><a href="index.html#dashboard" class="nav-link">Dashboard</a></li>
+          <li><a href="index.html#reservations" class="nav-link">Pickups</a></li>
+          <li><a href="technology.html" class="nav-link">Tech Stack</a></li>
+          <li><a href="index.html#home" class="nav-link nav-auth-btn">Login / Register</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Explain Hero -->
+  <section class="explain-hero">
+    <div class="container" style="max-width: 860px;">
+      <div class="explain-tag">
+        <span>📖</span> Saral Bhasha Me Puri Jankari • Complete User Guide
+      </div>
+      <h1 style="font-size: 3rem; font-weight: 800; color: #0A1931; line-height: 1.2; margin-bottom: 1.25rem;">
+        FoodLoop <span style="color: #FF6F00;">Kaise Kaam Karta Hai?</span>
+      </h1>
+      <p style="font-size: 1.15rem; color: #64748B; line-height: 1.7; margin-bottom: 2rem;">
+        Ek aisi digital vyavastha jo hotels, bakeries, banquets aur gharon ke bache hue swasthyaprad khane ko jarooratmand tak pahuchati hai — bina kisi shulk ke aur bina kisi waste ke.
+      </p>
+      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <a href="index.html#browse" class="btn btn-primary">
+          Explore Live Food Listings
+        </a>
+        <a href="index.html#add" class="btn btn-green">
+          Try Donating Food Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container" style="padding: 4.5rem 1.25rem;">
+
+    <!-- 1. The 3 Pillars / Roles -->
+    <section style="margin-bottom: 4rem;">
+      <div class="section-header centered">
+        <span class="section-subtitle">Tiranga Seva Model</span>
+        <h2 class="section-title">Is System Ke 3 Pramukh Stambh</h2>
+        <p class="section-desc">FoodLoop me teen tarah ke sadasya milkar food waste ko khatam karte hain:</p>
+      </div>
+
+      <div class="role-grid">
+        <!-- Role 1 -->
+        <article class="role-card saffron-card">
+          <div class="role-avatar saffron-bg">👨‍🍳</div>
+          <span style="font-size: 0.8rem; font-weight: 800; color: #FF6F00; text-transform: uppercase;">Stambh 1</span>
+          <h3 style="font-size: 1.35rem; font-weight: 800; color: #0A1931; margin: 0.35rem 0 0.75rem;">1. Food Donors (Bhojan Daata)</h3>
+          <p style="font-size: 0.925rem; color: #64748B; line-height: 1.6; margin-bottom: 1rem;">
+            Hotels, restaurants, bakehouses, catering companies ya shaadi-party ke aayojak jinke paas taza khana bach gaya ho.
+          </p>
+          <ul style="font-size: 0.85rem; color: #334155; margin-left: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem;">
+            <li>Form me khana ka naam, quantity aur category bharein.</li>
+            <li>Pickup location aur expiry deadline set karein.</li>
+            <li>Khana fenkne ke bajay kisi ki thali me pahuchayein.</li>
+          </ul>
+        </article>
+
+        <!-- Role 2 -->
+        <article class="role-card navy-card">
+          <div class="role-avatar navy-bg">🚴</div>
+          <span style="font-size: 0.8rem; font-weight: 800; color: #1E3A8A; text-transform: uppercase;">Stambh 2</span>
+          <h3 style="font-size: 1.35rem; font-weight: 800; color: #0A1931; margin: 0.35rem 0 0.75rem;">2. Volunteers & Couriers (Swayamsevak)</h3>
+          <p style="font-size: 0.925rem; color: #64748B; line-height: 1.6; margin-bottom: 1rem;">
+            Yuva, college students, aur local nagrik jo donor se khana lekar shelter ya basti tak surakshit pahuchate hain.
+          </p>
+          <ul style="font-size: 0.85rem; color: #334155; margin-left: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem;">
+            <li>Browse section me nearby khana dekhein aur claim karein.</li>
+            <li>Secure PIN (FL-XXXX) lekar donor ke paas jayein.</li>
+            <li>1-click status update: "Picked Up" &rarr; "Delivered".</li>
+          </ul>
+        </article>
+
+        <!-- Role 3 -->
+        <article class="role-card green-card">
+          <div class="role-avatar green-bg">🏠</div>
+          <span style="font-size: 0.8rem; font-weight: 800; color: #138808; text-transform: uppercase;">Stambh 3</span>
+          <h3 style="font-size: 1.35rem; font-weight: 800; color: #0A1931; margin: 0.35rem 0 0.75rem;">3. Beneficiary Shelters (Ashray & NGO)</h3>
+          <p style="font-size: 0.925rem; color: #64748B; line-height: 1.6; margin-bottom: 1rem;">
+            Old-age homes, orphanages, rain basera, aur community kitchens jahan bhookhe parivaron ko taza poshtik bhojan milta hai.
+          </p>
+          <ul style="font-size: 0.85rem; color: #334155; margin-left: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem;">
+            <li>Nirantar fresh meal supply bina kisi kharch ke.</li>
+            <li>Surakshit hygiene aur temperature-checked items.</li>
+            <li>Community impact matrix me har thali ka record.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- 2. Step-by-Step Flow Explanation -->
+    <section style="margin-bottom: 4.5rem;">
+      <div class="section-header centered">
+        <span class="section-subtitle">Charn-Baddh Karyapranali</span>
+        <h2 class="section-title">Step-by-Step Walkthrough: Khana List Karne Se Deliver Hone Tak</h2>
+        <p class="section-desc">Puri prakriya 5 aasan steps me poori hoti hai:</p>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="flow-step-row">
+        <div class="flow-number-badge num-saffron">01</div>
+        <div>
+          <span style="font-size: 0.8rem; font-weight: 800; color: #FF6F00; text-transform: uppercase;">Kadam 1: Bhojan Suchibaddh Karein</span>
+          <h3 style="font-size: 1.35rem; font-weight: 800; color: #0A1931; margin: 0.25rem 0 0.5rem;">Add Food: Surplus Food Ka Vivaran Dalein</h3>
+          <p style="font-size: 0.95rem; color: #475569; line-height: 1.6;">
+            Jab restaurant ya kitchen me bacha hua taza khana ho, toh <strong>"+ Donate Food"</strong> button par click karein.
+            Yahan item ka naam (e.g. <em>20 Fresh Roti & Dal Containers</em>), quantity, pickup address aur pickup deadline dalein.
+            Aap photo presets (Bakery, Produce, Prepared Meals) chun sakte hain aur live preview dekh sakte hain.
+          </p>
+          <div style="margin-top: 0.75rem;">
+            <a href="index.html#add" class="btn btn-secondary btn-sm" style="font-size: 0.8rem;">
+              Try Step 1: Add Food Form &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="flow-step-row">
+        <div class="flow-number-badge num-navy">02</div>
+        <div>
+          <span style="font-size: 0.8rem; font-weight: 800; color: #1E3A8A; text-transform: uppercase;">Kadam 2: Filter & Search Karein</span>
+          <h3 style="font-size: 1.35rem; font-weight: 800; color: #0A1931; margin: 0.25rem 0 0.5rem;">Browse Food: Available Khana Khojein</h3>
+          <p style="font-size: 0.95rem; color: #475569; line-height: 1.6;">
+            Volunteers aur shelters <strong>"Browse Food"</strong> section me real-time catalog dekhte hain.
+            Aap Category (Bakery, Vegetables, Prepared Meals), Dietary Preference (Vegetarian, Vegan), ya Expiry Deadline ke mutabik search kar sakte hain.
+          </p>
+          <div style="margin-top: 0.75rem;">
+            <a href="index.html#browse" class="btn btn-secondary btn-sm" style="font-size: 0.8rem;">
+              Try Step 2: Browse Food Catalog &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="flow-step-row">
+        <div class="flow-number-badge num-saffron">03</div>
+        <div>
+          <span style="font-size: 0.8rem; font-weight: 800; color: #FF6F00; text-transform: uppercase;">Kadam 3: Reservation & Verification PIN</span>
+          <h3 style="font-size: 1.35rem; font-weight: 800; color: #0A1931; margin: 0.25rem 0 0.5rem;">Reserve Food: Item Ko Secure Karein</h3>
+          <p style="font-size: 0.95rem; color: #475569; line-height: 1.6;">
+            Kisi available item par <strong>"Reserve Food"</strong> dabane par ek pop-up khulta hai.
+            Yahan volunteer apna naam aur charity organization bharte hain. System turant ek <strong>Verification PIN (e.g. FL-6821)</strong> issue karta hai.
+            Duplicate reservation prevention engine ye ensure karta hai ki ek item ko ek hi samay do log na book kar lein.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="flow-step-row">
+        <div class="flow-number-badge num-navy">04</div>
+        <div>
+          <span style="font-size: 0.8rem; font-weight: 800; color: #1E3A8A; text-transform: uppercase;">Kadam 4: Pickup & Stepper Progression</span>
+          <h3 style="font-size: 1.35rem; font-weight: 800; color: #0A1931; margin: 0.25rem 0 0.5rem;">Pickup: Donor Se Khana Collect Karein</h3>
+          <p style="font-size: 0.95rem; color: #475569; line-height: 1.6;">
+            Volunteer pickup location par pahuch kar PIN dikhata hai.
+            Phir app me <strong>"Confirm Food Picked Up"</strong> button dabata hai.
+            Status turant <em>Reserved</em> se badalkar <em>Picked Up</em> ho jata hai aur pipeline stepper agle charn par chala jata hai.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="flow-step-row">
+        <div class="flow-number-badge num-green">05</div>
+        <div>
+          <span style="font-size: 0.8rem; font-weight: 800; color: #138808; text-transform: uppercase;">Kadam 5: Delivery & Live Impact</span>
+          <h3 style="font-size: 1.35rem; font-weight: 800; color: #0A1931; margin: 0.25rem 0 0.5rem;">Mark Delivered: Thali Tak Khana Pahucha Kar Record Karein</h3>
+          <p style="font-size: 0.95rem; color: #475569; line-height: 1.6;">
+            Shelter me khana deliver hone par <strong>"Mark as Delivered"</strong> par click karein.
+            Ye donation <em>Completed</em> ho jata hai aur turant Dashboard par <strong>Total Rescued Food (kg)</strong>, <strong>Meals Provided</strong>, aur <strong>CO2 Emissions Saved</strong> dynamically update ho jate hain!
+          </p>
+          <div style="margin-top: 0.75rem;">
+            <a href="index.html#dashboard" class="btn btn-green btn-sm" style="font-size: 0.8rem;">
+              View Live Dashboard &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Frequently Asked Questions (FAQ) -->
+    <section style="margin-bottom: 4rem;">
+      <div class="section-header centered">
+        <span class="section-subtitle">Aapke Sawal, Hamare Jawab</span>
+        <h2 class="section-title">Aksar Pooche Jane Wale Sawal (FAQ)</h2>
+      </div>
+
+      <div style="max-width: 860px; margin: 0 auto;">
+        <div class="faq-accordion-item">
+          <div class="faq-question">
+            <span>❓ Kya FoodLoop ka upyog karne ke liye koi charges lagte hain?</span>
+            <span style="color: #FF6F00;">▼</span>
+          </div>
+          <div class="faq-answer">
+            Nahi! FoodLoop 100% free community-driven platform hai. Na donor se paise liye jate hain aur na hi shelters se.
+          </div>
+        </div>
+
+        <div class="faq-accordion-item">
+          <div class="faq-question">
+            <span>❓ Kis tarah ka khana donate kiya ja sakta hai?</span>
+            <span style="color: #FF6F00;">▼</span>
+          </div>
+          <div class="faq-answer">
+            Fresh bakery items, unbroken bread, organic taze fal-sabziyan, commercial kitchens ke prepared hygienically pack meals, aur packaged groceries jinki shelf life bachi ho. Khana kharab, basi ya khula nahi hona chahiye.
+          </div>
+        </div>
+
+        <div class="faq-accordion-item">
+          <div class="faq-question">
+            <span>❓ Kya data internet na hone par bhi save rehta hai?</span>
+            <span style="color: #FF6F00;">▼</span>
+          </div>
+          <div class="faq-answer">
+            Haan! FoodLoop aapke browser aur Android APK me HTML5 LocalStorage API use karta hai. Sabhi demo listings, reservations, aur dashboard statistics bina kisi external database ke phone me turant save ho jate hain.
+          </div>
+        </div>
+
+        <div class="faq-accordion-item">
+          <div class="faq-question">
+            <span>❓ Agar demo data kharab ho jaye to kya reset kar sakte hain?</span>
+            <span style="color: #FF6F00;">▼</span>
+          </div>
+          <div class="faq-answer">
+            Bilkul! Top banner me aur Dashboard par <strong>"Reset Demo Data"</strong> button diya gaya hai, jisse ek click me shuruati sample listings wapas aa jati hain.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Action CTA -->
+    <section style="text-align: center; background: linear-gradient(135deg, #0A1931 0%, #050D1A 100%); border-radius: var(--radius-lg); padding: 3.5rem 2rem; color: white;">
+      <span style="color: #FF6F00; font-weight: 800; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.05em;">Abhi Shuru Karein</span>
+      <h2 style="font-size: 2.2rem; font-weight: 800; margin: 0.5rem 0 1rem;">FoodLoop App Me Live Flow Dekhein</h2>
+      <p style="color: #CBD5E1; max-width: 600px; margin: 0 auto 2rem; font-size: 1.05rem;">
+        Add Food &rarr; Browse &rarr; Reserve with PIN &rarr; Confirm Pickup &rarr; Deliver &rarr; Live Dashboard update.
+      </p>
+      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <a href="index.html#home" class="btn btn-primary" style="padding: 0.9rem 2rem;">
+          Launch FoodLoop Web App
+        </a>
+        <a href="technology.html" class="btn btn-secondary" style="padding: 0.9rem 2rem;">
+          View Technical Architecture
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       REDESIGNED TIRANGA FOOTER
+       ========================================================================= -->
+  <footer class="site-footer">
+    <div class="footer-top-accent"></div>
+    <div class="container footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>
+            <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #FF6F00;"></span>
+            FoodLoop <span style="font-size: 1rem;">🇮🇳</span>
+          </h4>
+          <p>
+            Bharat Ka Zero Food Waste Mission — Shreshtha taze khane ko fenkne se bachakar har jarooratmand thali tak pahuchane wali ek aadhunik digital vyavastha.
+          </p>
+          <div class="footer-tiranga-badge">
+            <span style="color: #FF6F00;">● Kesariya</span>
+            <span style="color: #FFFFFF;">● Shwet</span>
+            <span style="color: #138808;">● Harit</span>
+            <span style="color: #93C5FD;">● Chakra</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Pramukh Sewayein</h5>
+          <ul>
+            <li><a href="index.html#home">&rarr; Mukhya Prishth (Home)</a></li>
+            <li><a href="index.html#browse">&rarr; Khana Khojein (Browse)</a></li>
+            <li><a href="index.html#add">&rarr; Khana Daan Karein (Donate)</a></li>
+            <li><a href="index.html#reservations">&rarr; Pickup Pipeline (Pickups)</a></li>
+            <li><a href="index.html#my-donations">&rarr; Meri Listings (My Donations)</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col green-col">
+          <h5>Jankari & Nitiyan</h5>
+          <ul>
+            <li><a href="explain.html">&rarr; Kaise Kaam Karta Hai (Guide)</a></li>
+            <li><a href="technology.html">&rarr; Technical Architecture</a></li>
+            <li><a href="index.html#impact">&rarr; Environmental Impact</a></li>
+            <li><a href="index.html#dashboard">&rarr; Live Dashboard Stats</a></li>
+            <li><a href="FoodLoop.apk">&rarr; Download Android APK (5.4 MB)</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col chakra-col">
+          <h5>Suraksha & Contact</h5>
+          <ul>
+            <li><a href="explain.html">&rarr; Food Safety Standards</a></li>
+            <li><a href="explain.html">&rarr; Good Samaritan Protection</a></li>
+            <li><a href="explain.html">&rarr; Cold-Chain Hygiene Rule</a></li>
+            <li><a href="#" onclick="alert('FoodLoop Volunteer Helpline: 1800-FOOD-LOOP (Demo)'); return false;">&rarr; Helpline & Support</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 FoodLoop — Food Waste Reduction System. Made with Pride for Zero Hunger.
+        </div>
+        <div class="footer-bottom-links">
+          <a href="index.html#home">Home</a>
+          <a href="explain.html">System Guide</a>
+          <a href="technology.html">Tech Stack</a>
+          <a href="FoodLoop.apk" style="color: #FF6F00; font-weight: 800;">Get Android APK &darr;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
